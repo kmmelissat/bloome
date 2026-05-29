@@ -16,10 +16,10 @@ export type NavTab = {
 };
 
 export const NAV_TABS: NavTab[] = [
-  { href: "/", label: "Inicio", Icon: IconHome },
-  { href: "/transactions", label: "Movimientos", Icon: IconArrowsLeftRight },
-  { href: "/cards", label: "Tarjetas", Icon: IconCreditCard },
-  { href: "/budgets", label: "Presupuestos", Icon: IconChartPie },
+  { href: "/", label: "Home", Icon: IconHome },
+  { href: "/transactions", label: "Transactions", Icon: IconArrowsLeftRight },
+  { href: "/cards", label: "Cards", Icon: IconCreditCard },
+  { href: "/budgets", label: "Budgets", Icon: IconChartPie },
   { href: "/insights", label: "Insights", Icon: IconSparkles },
 ];
 

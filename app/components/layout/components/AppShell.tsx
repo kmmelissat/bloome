@@ -20,8 +20,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         }`}
         style={{ paddingBottom: "calc(96px + env(safe-area-inset-bottom))" }}
       >
-        <Header />
-        <div className="max-w-3xl mx-auto">{children}</div>
+        <div className="max-w-3xl mx-auto px-5 md:px-0">
+          <Header />
+          {children}
+        </div>
       </main>
 
       <Tabbar />

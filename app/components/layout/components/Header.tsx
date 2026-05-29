@@ -22,7 +22,7 @@ export default function Header() {
   const title = usePageTitle();
 
   return (
-    <header className="sticky top-0 z-30 px-5 pt-[env(safe-area-inset-top)]">
+    <header className="sticky top-0 z-30 pt-[env(safe-area-inset-top)]">
       {/* Mobile: usuario izquierda, iso centro, notificaciones derecha */}
       <div className="flex items-center md:hidden py-3">
         <div className="flex-1">
