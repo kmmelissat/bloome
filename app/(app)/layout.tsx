@@ -1,5 +1,5 @@
-import BottomTabBar from "@/app/components/BottomTabBar";
-import Sidebar from "@/app/components/Sidebar";
+import BottomTabBar from "@/app/components/layout/components/Tabbar";
+import Sidebar from "@/app/components/layout/components/Sidebar";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,7 +11,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Main content — offset by sidebar width on desktop */}
       <main
-        className="flex-1 scroll-touch md:ml-55"
+        className="flex-1 scroll-touch md:ml-63"
         style={{
           paddingBottom: "calc(96px + env(safe-area-inset-bottom))",
         }}

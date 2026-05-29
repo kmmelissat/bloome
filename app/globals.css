@@ -8,14 +8,29 @@
   --color-text: #1c1c1e;
   --color-text-muted: #6e6e73;
   --color-surface: #ffffff;
+  --color-border: rgba(0, 0, 0, 0.08);
 
   --font-sans: var(--font-dm-sans), "DM Sans", -apple-system, BlinkMacSystemFont,
     sans-serif;
 
   --radius-card: 20px;
   --radius-btn: 12px;
+  --radius-pill: 100px;
 
   --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-float: 0 8px 32px rgba(0, 0, 0, 0.10), 0 1.5px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* Non-utility layout constants */
+:root {
+  --sidebar-width: 220px;
+  --bottom-bar-height: 96px;
+  --primary-subtle: rgba(251, 157, 156, 0.10);
+  --primary-focus: rgba(251, 157, 156, 0.4);
+  --glass-bg: rgba(255, 250, 249, 0.65);
+  --glass-backdrop: blur(28px) saturate(200%) brightness(1.05);
+  --glass-border: 0.5px solid rgba(255, 255, 255, 0.7);
 }
 
 *,
@@ -29,6 +44,7 @@ html {
   height: 100dvh;
   font-family: var(--font-sans);
   -webkit-text-size-adjust: 100%;
+  color-scheme: light;
 }
 
 body {
@@ -41,6 +57,16 @@ body {
   font-family: var(--font-sans);
 }
 
+::selection {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
 a,
 button,
 [role="button"] {
@@ -50,10 +76,20 @@ button,
 
 *:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(251, 157, 156, 0.4);
+  box-shadow: 0 0 0 3px var(--primary-focus);
 }
 
 .scroll-touch {
   -webkit-overflow-scrolling: touch;
   overflow-y: auto;
+}
+
+/* Glassmorphism — used by Sidebar and BottomTabBar */
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    border: var(--glass-border);
+  }
 }
