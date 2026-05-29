@@ -1,11 +1,13 @@
-import Image from "next/image";
+import { getGreeting } from "@/app/utils/greeting";
 
 export default function HomePage() {
+  const greeting = getGreeting();
+
   return (
     <div className="scroll-touch">
-      <div className="px-5 pt-15 pb-2">
-        <Image src="/logo.svg" alt="bloomé" width={120} height={23} priority className="block" />
-      </div>
+      <h1 className="text-[34px] font-bold text-text tracking-[-0.5px]">
+        {greeting}, User!
+      </h1>
     </div>
   );
 }
