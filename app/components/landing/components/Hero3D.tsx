@@ -198,6 +198,59 @@ export default function Hero3D() {
           transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           style={{ rotateX, rotateY, transformPerspective: 600, transformStyle: "preserve-3d" }}
         >
+          {/* ── Snake ribbon — SVG textPath on a sine wave ── */}
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              zIndex: 0,
+              inset: "0 -60px",
+              maskImage: "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
+            }}
+          >
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 800 400"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <path
+                  id="snake-path"
+                  d="M -600,440 C -450,300 -300,460 -150,320 C 0,180 150,340 300,200 C 450,40 600,180 750,40 C 900,-100 1050,60 1200,-80 C 1350,-220 1500,-60 1650,-200"
+                  fill="none"
+                />
+              </defs>
+
+              <g>
+                {/* Pink ribbon band */}
+                <path
+                  d="M -600,440 C -450,300 -300,460 -150,320 C 0,180 150,340 300,200 C 450,40 600,180 750,40 C 900,-100 1050,60 1200,-80 C 1350,-220 1500,-60 1650,-200"
+                  fill="none"
+                  stroke="rgba(251,157,156,0.8)"
+                  strokeWidth="30"
+                  strokeLinecap="round"
+                />
+                {/* White text */}
+                <text
+                  fontFamily="inherit"
+                  fontSize="11"
+                  fontWeight="700"
+                  letterSpacing="3.5"
+                  textAnchor="start"
+                  fill="white"
+                  dominantBaseline="middle"
+                >
+                  <textPath href="#snake-path" startOffset="0%" method="align" spacing="auto">
+                    <animate attributeName="startOffset" from="0%" to="-50%" dur="20s" repeatCount="indefinite" />
+                    {Array.from({ length: 8 }).map(() => `TRACK · BUDGET · SAVE · INSIGHTS · CARDS · GOALS · MANAGE · CASHFLOW · GROW · `).join("")}
+                  </textPath>
+                </text>
+              </g>
+            </svg>
+          </div>
+
           {/* Coral coin — top right, floats up */}
           <motion.div
             className="absolute top-4 right-4 md:top-8 md:right-8 z-10"
