@@ -106,7 +106,7 @@ export default function Footer() {
 
           {/* Product */}
           <div className="flex flex-col gap-3">
-            <p className="text-[12px] font-bold tracking-[0.12em] uppercase text-text/40 mb-1">Product</p>
+            <p className="text-[12px] font-bold tracking-[0.08em] uppercase text-text/50 mb-1">Product</p>
             {links.product.map(({ label, href }) => (
               <Link key={label} href={href} className="text-[14px] text-text-muted hover:text-text transition-colors">
                 {label}
@@ -116,7 +116,7 @@ export default function Footer() {
 
           {/* Company */}
           <div className="flex flex-col gap-3">
-            <p className="text-[12px] font-bold tracking-[0.12em] uppercase text-text/40 mb-1">Company</p>
+            <p className="text-[12px] font-bold tracking-[0.08em] uppercase text-text/50 mb-1">Company</p>
             {links.company.map(({ label, href }) => (
               <Link key={label} href={href} className="text-[14px] text-text-muted hover:text-text transition-colors">
                 {label}
@@ -126,7 +126,7 @@ export default function Footer() {
 
           {/* Legal */}
           <div className="flex flex-col gap-3">
-            <p className="text-[12px] font-bold tracking-[0.12em] uppercase text-text/40 mb-1">Legal</p>
+            <p className="text-[12px] font-bold tracking-[0.08em] uppercase text-text/50 mb-1">Legal</p>
             {links.legal.map(({ label, href }) => (
               <Link key={label} href={href} className="text-[14px] text-text-muted hover:text-text transition-colors">
                 {label}

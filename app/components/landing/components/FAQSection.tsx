@@ -96,7 +96,7 @@ export default function FAQSection() {
       </div>
 
       {/* Accordion */}
-      <div className="rounded-3xl bg-white border border-black/5 px-6 shadow-[0_2px_16px_rgba(0,0,0,0.05)]">
+      <div className="rounded-3xl bg-white border border-black/5 px-6 py-2 shadow-[0_2px_16px_rgba(0,0,0,0.05)]">
         {faqs.map((faq, i) => (
           <FAQItem key={faq.q} {...faq} index={i} />
         ))}

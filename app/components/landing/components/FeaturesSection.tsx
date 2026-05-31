@@ -490,7 +490,7 @@ function FeatureBlock({ badge, title, description, mockup, flip = false, floatDe
       >
         <motion.span
           variants={fadeUp}
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-[12px] font-bold mb-5 tracking-wide"
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/15 text-text text-[12px] font-bold mb-5 tracking-wide"
         >
           {badge}
         </motion.span>

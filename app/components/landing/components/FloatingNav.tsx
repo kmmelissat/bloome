@@ -32,7 +32,7 @@ export default function FloatingNav() {
             <div className="flex items-center gap-3">
               <Link
                 href="/login"
-                className="text-[13px] font-medium text-text-muted hover:text-text transition-colors px-3 py-1.5"
+                className="text-[13px] font-medium text-text/75 hover:text-text transition-colors px-3 py-1.5"
               >
                 Log in
               </Link>

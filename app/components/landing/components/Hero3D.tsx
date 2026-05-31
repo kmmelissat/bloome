@@ -100,7 +100,7 @@ export default function Hero3D() {
           {/* Badge */}
           <motion.span
             variants={fadeUp}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-[12px] md:text-[13px] font-semibold mb-4 md:mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-text text-[12px] md:text-[13px] font-semibold mb-4 md:mb-8"
           >
             ✦ Personal finance, reimagined
           </motion.span>
@@ -141,7 +141,7 @@ export default function Hero3D() {
           {/* Subtitle */}
           <motion.p
             variants={fadeUp}
-            className="text-text-muted text-[15px] md:text-[17px] max-w-sm leading-relaxed mb-6 md:mb-10"
+            className="text-text/70 text-[15px] md:text-[17px] max-w-sm leading-relaxed mb-6 md:mb-10"
           >
             Track expenses, manage cards, and get AI-powered insights. All in one elegant app.
           </motion.p>
@@ -169,7 +169,7 @@ export default function Hero3D() {
                 <div key={i} className={`w-7 h-7 md:w-8 md:h-8 rounded-full ${c} border-2 border-bg`} />
               ))}
             </div>
-            <p className="text-[12px] md:text-[13px] text-text-muted">
+            <p className="text-[12px] md:text-[13px] text-text/70">
               <span className="font-semibold text-text">2,000+</span> tracking their finances
             </p>
           </motion.div>
@@ -179,7 +179,7 @@ export default function Hero3D() {
             {stats.map(({ icon: Icon, value, label }) => (
               <div key={label} className="flex items-center gap-2.5">
                 <span className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <Icon size={15} stroke={2} className="text-primary" />
+                  <Icon size={15} stroke={2} className="text-text/60" />
                 </span>
                 <div>
                   <p className="text-[15px] font-bold text-text leading-none">{value}</p>
@@ -237,7 +237,7 @@ export default function Hero3D() {
                   fontFamily="inherit"
                   fontSize="11"
                   fontWeight="700"
-                  letterSpacing="1.8"
+                  letterSpacing="1"
                   textAnchor="start"
                   fill="white"
                   dominantBaseline="middle"
