@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -9,9 +9,17 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  style: ["italic"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-script",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "bloomé",
-  description: "Tus finanzas personales, organizadas.",
+  description: "Your finances, beautifully simple.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -39,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${dmSans.variable} h-full`}>
+    <html lang="en" className={`${dmSans.variable} ${cormorant.variable} h-full`}>
       <body className="h-full antialiased">{children}</body>
     </html>
   );

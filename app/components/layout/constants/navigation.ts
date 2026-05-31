@@ -16,7 +16,7 @@ export type NavTab = {
 };
 
 export const NAV_TABS: NavTab[] = [
-  { href: "/", label: "Home", Icon: IconHome },
+  { href: "/dashboard", label: "Home", Icon: IconHome },
   { href: "/transactions", label: "Transactions", Icon: IconArrowsLeftRight },
   { href: "/cards", label: "Cards", Icon: IconCreditCard },
   { href: "/budgets", label: "Budgets", Icon: IconChartPie },
@@ -24,7 +24,7 @@ export const NAV_TABS: NavTab[] = [
 ];
 
 export const BOTTOM_TABS: NavTab[] = [
-  { href: "/", label: "Inicio", Icon: IconHome },
+  { href: "/dashboard", label: "Inicio", Icon: IconHome },
   { href: "/transactions", label: "Stats", Icon: IconChartBar },
   { href: "/budgets", label: "Budget", Icon: IconChartPie },
   { href: "/settings", label: "Settings", Icon: IconSettings },
