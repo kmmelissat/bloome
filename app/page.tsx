@@ -2,6 +2,7 @@ import FloatingNav from "@/app/components/landing/components/FloatingNav";
 import Hero3D from "@/app/components/landing/components/Hero3D";
 import FeaturesSection from "@/app/components/landing/components/FeaturesSection";
 import TestimonialsSection from "@/app/components/landing/components/TestimonialsSection";
+import FAQSection from "@/app/components/landing/components/FAQSection";
 
 export default function LandingPage() {
   return (
@@ -14,6 +15,7 @@ export default function LandingPage() {
       <Hero3D />
       <FeaturesSection />
       <TestimonialsSection />
+      <FAQSection />
     </div>
   );
 }
