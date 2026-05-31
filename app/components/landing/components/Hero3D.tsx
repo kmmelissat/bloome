@@ -100,7 +100,7 @@ export default function Hero3D() {
           {/* Badge */}
           <motion.span
             variants={fadeUp}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-text text-[12px] md:text-[13px] font-semibold mb-4 md:mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-[12px] md:text-[13px] font-semibold mb-4 md:mb-8"
           >
             ✦ Personal finance, reimagined
           </motion.span>
@@ -179,7 +179,7 @@ export default function Hero3D() {
             {stats.map(({ icon: Icon, value, label }) => (
               <div key={label} className="flex items-center gap-2.5">
                 <span className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <Icon size={15} stroke={2} className="text-text/60" />
+                  <Icon size={15} stroke={2} className="text-primary" />
                 </span>
                 <div>
                   <p className="text-[15px] font-bold text-text leading-none">{value}</p>
