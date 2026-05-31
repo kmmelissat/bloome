@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, useState, useId } from 'react';
 
 export interface GlassSurfaceProps {
@@ -68,6 +70,8 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
   const blueGradId = `blue-grad-${uniqueId}`;
 
   const [svgSupported, setSvgSupported] = useState(false);
+  const [backdropOk, setBackdropOk] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const feImageRef = useRef<SVGFEImageElement>(null);
   const redChannelRef = useRef<SVGFEDisplacementMapElement>(null);
@@ -138,7 +142,11 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
   }, [width, height, borderRadius, borderWidth, brightness, opacity, blur, displace,
       distortionScale, redOffset, greenOffset, blueOffset, xChannel, yChannel, mixBlendMode]);
 
-  useEffect(() => { setSvgSupported(supportsSVGFilters()); }, []);
+  useEffect(() => {
+    setSvgSupported(supportsSVGFilters());
+    setBackdropOk(supportsBackdropFilter());
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -157,7 +165,8 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
       borderRadius: `${borderRadius}px`,
     };
 
-    const backdropOk = supportsBackdropFilter();
+    // Before mount return neutral styles so SSR and client match
+    if (!mounted) return base;
 
     if (svgSupported) {
       return {
