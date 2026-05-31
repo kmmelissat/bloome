@@ -112,7 +112,7 @@ export default function Hero3D() {
             className="leading-none mb-4 md:mb-6"
           >
             {/* Mobile: one tight block. Desktop: three lines */}
-            <span className="block md:hidden font-bold text-text tracking-tighter leading-[1.05]" style={{ fontSize: "clamp(28px,8vw,40px)" }}>
+            <span className="block md:hidden font-bold text-text leading-[1.05]" style={{ fontSize: "clamp(28px,8vw,40px)", letterSpacing: "-0.03em" }}>
               Your finances,{" "}
               <span className="font-handwritten text-primary" style={{ fontSize: "clamp(32px,9vw,46px)" }}>
                 <TextType
@@ -123,7 +123,7 @@ export default function Hero3D() {
               simple.
             </span>
             <span className="hidden md:block">
-              <span className="block font-bold text-text tracking-[-0.06em]" style={{ fontSize: "clamp(40px,5vw,66px)" }}>
+              <span className="block font-bold text-text" style={{ fontSize: "clamp(40px,5vw,66px)", letterSpacing: "-0.04em" }}>
                 Your finances,
               </span>
               <span className="block font-handwritten text-primary" style={{ fontSize: "clamp(42px,5.5vw,72px)" }}>
@@ -132,7 +132,7 @@ export default function Hero3D() {
                   cursorClassName="bg-primary"
                 />
               </span>
-              <span className="block font-bold text-text tracking-[-0.06em]" style={{ fontSize: "clamp(40px,5vw,66px)" }}>
+              <span className="block font-bold text-text" style={{ fontSize: "clamp(40px,5vw,66px)", letterSpacing: "-0.04em" }}>
                 simple.
               </span>
             </span>
@@ -237,7 +237,7 @@ export default function Hero3D() {
                   fontFamily="inherit"
                   fontSize="11"
                   fontWeight="700"
-                  letterSpacing="3.5"
+                  letterSpacing="1.8"
                   textAnchor="start"
                   fill="white"
                   dominantBaseline="middle"

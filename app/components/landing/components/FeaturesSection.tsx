@@ -580,9 +580,6 @@ export default function FeaturesSection() {
     <section className="w-full max-w-6xl mx-auto px-6 md:px-8 pb-32">
       {/* ── Header ── */}
       <FadeBlock className="text-center mb-24">
-        <motion.span variants={fadeUp} className="text-[12px] font-bold tracking-[0.15em] uppercase text-primary mb-3 block">
-          Everything you need
-        </motion.span>
         <motion.h2
           variants={fadeUp}
           className="text-[40px] md:text-[52px] font-bold text-text tracking-[-1.5px] leading-[1.05] mb-4"

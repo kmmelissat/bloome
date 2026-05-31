@@ -87,9 +87,6 @@ export default function FAQSection() {
     <section className="w-full max-w-3xl mx-auto px-8 pb-32">
       {/* Header */}
       <div className="text-center mb-12">
-        <span className="text-[12px] font-bold tracking-[0.15em] uppercase text-primary mb-3 block">
-          FAQ
-        </span>
         <h2 className="text-[36px] md:text-[48px] font-bold text-text tracking-[-1.5px] leading-[1.05]">
           Got questions?{" "}
           <span className="font-handwritten text-primary text-[44px] md:text-[56px] tracking-normal">

@@ -53,7 +53,7 @@ export default function Footer() {
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 px-8 md:px-14 py-12 md:py-14">
             <div className="flex flex-col items-center md:items-start text-center md:text-left gap-3">
               <h2
-                className="font-bold text-white tracking-tight leading-none"
+                className="font-bold text-text tracking-tight leading-none"
                 style={{ fontSize: "clamp(26px, 4vw, 42px)" }}
               >
                 Your finances,{" "}
@@ -61,20 +61,20 @@ export default function Footer() {
                   finally clear
                 </span>
               </h2>
-              <p className="text-white/70 text-[15px] leading-relaxed max-w-xs">
+              <p className="text-text/60 text-[15px] leading-relaxed max-w-xs">
                 Free forever. No credit card. Works on any device.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 shrink-0">
               <Link
                 href="/signup"
-                className="px-7 py-3.5 rounded-full bg-white text-primary font-semibold text-[15px] text-center transition-opacity hover:opacity-85 active:opacity-70 shadow-[0_4px_16px_rgba(0,0,0,0.1)] whitespace-nowrap"
+                className="px-7 py-3.5 rounded-full bg-text text-white font-semibold text-[15px] text-center transition-opacity hover:opacity-80 active:opacity-70 whitespace-nowrap"
               >
                 Get started free
               </Link>
               <Link
                 href="/login"
-                className="px-7 py-3.5 rounded-full bg-white/20 text-white font-medium text-[15px] text-center transition-opacity hover:opacity-80 active:opacity-60 backdrop-blur-sm whitespace-nowrap"
+                className="px-7 py-3.5 rounded-full bg-black/10 text-text font-medium text-[15px] text-center transition-opacity hover:bg-black/15 active:opacity-70 whitespace-nowrap"
               >
                 Log in
               </Link>

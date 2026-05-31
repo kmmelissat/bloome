@@ -111,9 +111,6 @@ export default function TestimonialsSection() {
     <section className="w-full pb-32 overflow-hidden">
       {/* Header */}
       <div className="text-center mb-14 px-8">
-        <span className="text-[12px] font-bold tracking-[0.15em] uppercase text-primary mb-3 block">
-          Loved by users
-        </span>
         <h2 className="text-[36px] md:text-[48px] font-bold text-text tracking-[-1.5px] leading-[1.05] mb-4">
           Real people,{" "}
           <span className="font-handwritten text-primary text-[44px] md:text-[58px] tracking-normal">
