@@ -317,7 +317,7 @@ function PWAMockup() {
   );
 }
 
-// ── Feature block ─────────────────────────────────────────────────────────────
+// ── Feature block ───
 
 interface Feature {
   badge: string;

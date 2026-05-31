@@ -88,82 +88,94 @@ export default function Hero3D() {
       <div className="pointer-events-none absolute top-1/3 left-1/2 w-72 h-72 rounded-full bg-accent/20 blur-[60px]" />
 
       {/* ── Two-column layout ── */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 flex flex-col md:flex-row items-center gap-16 pt-28 pb-16">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 flex flex-col md:flex-row items-center gap-8 md:gap-16 pt-24 md:pt-28 pb-10 md:pb-16">
 
         {/* LEFT — staggered text entrance */}
         <motion.div
-          className="flex-1 flex flex-col items-start"
+          className="flex-1 flex flex-col items-center md:items-start text-center md:text-left"
           variants={container}
           initial="hidden"
           animate="show"
-
         >
-          {/* Avatars + social proof */}
-          <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
-            <div className="flex -space-x-2">
-              {avatarColors.map((c, i) => (
-                <div key={i} className={`w-8 h-8 rounded-full ${c} border-2 border-bg`} />
-              ))}
-            </div>
-            <p className="text-[13px] text-text-muted">
-              <span className="font-semibold text-text">2,000+</span> people tracking their finances
-            </p>
-          </motion.div>
-
           {/* Badge */}
           <motion.span
             variants={fadeUp}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-[13px] font-semibold mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-[12px] md:text-[13px] font-semibold mb-4 md:mb-8"
           >
             ✦ Personal finance, reimagined
           </motion.span>
 
-          {/* Headline */}
+          {/* Headline — compact on mobile */}
           <motion.h1
             variants={fadeUp}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="leading-none mb-6"
+            className="leading-none mb-4 md:mb-6"
           >
-            <span className="block font-bold text-text tracking-[-0.06em]" style={{ fontSize: "clamp(40px,5vw,66px)" }}>
-              Your finances,
-            </span>
-            <span className="block font-handwritten text-primary" style={{ fontSize: "clamp(42px,5.5vw,72px)" }}>
-              <TextType
-                texts={["beautifully", "effortlessly", "mindfully", "clearly"]}
-                cursorClassName="bg-primary"
-              />
-            </span>
-            <span className="block font-bold text-text tracking-[-0.06em]" style={{ fontSize: "clamp(40px,5vw,66px)" }}>
+            {/* Mobile: one tight block. Desktop: three lines */}
+            <span className="block md:hidden font-bold text-text tracking-tighter leading-[1.05]" style={{ fontSize: "clamp(28px,8vw,40px)" }}>
+              Your finances,{" "}
+              <span className="font-handwritten text-primary" style={{ fontSize: "clamp(32px,9vw,46px)" }}>
+                <TextType
+                  texts={["beautifully", "effortlessly", "mindfully", "clearly"]}
+                  cursorClassName="bg-primary"
+                />
+              </span>{" "}
               simple.
+            </span>
+            <span className="hidden md:block">
+              <span className="block font-bold text-text tracking-[-0.06em]" style={{ fontSize: "clamp(40px,5vw,66px)" }}>
+                Your finances,
+              </span>
+              <span className="block font-handwritten text-primary" style={{ fontSize: "clamp(42px,5.5vw,72px)" }}>
+                <TextType
+                  texts={["beautifully", "effortlessly", "mindfully", "clearly"]}
+                  cursorClassName="bg-primary"
+                />
+              </span>
+              <span className="block font-bold text-text tracking-[-0.06em]" style={{ fontSize: "clamp(40px,5vw,66px)" }}>
+                simple.
+              </span>
             </span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
             variants={fadeUp}
-            className="text-text-muted text-[17px] max-w-sm leading-relaxed mb-10"
+            className="text-text-muted text-[15px] md:text-[17px] max-w-sm leading-relaxed mb-6 md:mb-10"
           >
             Track expenses, manage cards, and get AI-powered insights — all in one elegant app.
           </motion.p>
 
-          {/* CTAs */}
-          <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 mb-12">
+          {/* CTA — only "Get started" on mobile, Log in is in the nav */}
+          <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 mb-6 md:mb-12 w-full sm:w-auto">
             <Link
               href="/signup"
-              className="px-8 py-4 rounded-full bg-linear-to-r from-primary to-warm font-semibold text-[16px] text-center text-text transition-opacity hover:opacity-85 active:opacity-70"
+              className="px-8 py-3.5 md:py-4 rounded-full bg-linear-to-r from-primary to-warm font-semibold text-[15px] md:text-[16px] text-center text-text transition-opacity hover:opacity-85 active:opacity-70"
             >
               Get started — it&apos;s free
             </Link>
             <Link
               href="/login"
-              className="px-8 py-4 rounded-full glass text-text font-medium text-[16px] text-center transition-opacity hover:opacity-75 active:opacity-60"
+              className="hidden md:block px-8 py-4 rounded-full glass text-text font-medium text-[16px] text-center transition-opacity hover:opacity-75 active:opacity-60"
             >
               Log in
             </Link>
           </motion.div>
 
-          {/* Stats */}
-          <motion.div variants={fadeUp} className="flex items-center gap-8 flex-wrap">
+          {/* Avatars + social proof — below CTA on mobile, below stats on desktop */}
+          <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6 md:mb-8 order-last md:order-0">
+            <div className="flex -space-x-2">
+              {avatarColors.map((c, i) => (
+                <div key={i} className={`w-7 h-7 md:w-8 md:h-8 rounded-full ${c} border-2 border-bg`} />
+              ))}
+            </div>
+            <p className="text-[12px] md:text-[13px] text-text-muted">
+              <span className="font-semibold text-text">2,000+</span> tracking their finances
+            </p>
+          </motion.div>
+
+          {/* Stats — hidden on mobile */}
+          <motion.div variants={fadeUp} className="hidden md:flex items-center gap-8 flex-wrap">
             {stats.map(({ icon: Icon, value, label }) => (
               <div key={label} className="flex items-center gap-2.5">
                 <span className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
@@ -188,7 +200,7 @@ export default function Hero3D() {
         >
           {/* Coral coin — top right, floats up */}
           <motion.div
-            className="absolute top-8 right-8 z-10"
+            className="absolute top-4 right-4 md:top-8 md:right-8 z-10"
             animate={{ y: [0, -14, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             style={{ translateZ: 60 }}
@@ -198,13 +210,13 @@ export default function Hero3D() {
               alt=""
               width={90}
               height={90}
-              style={{ filter: "drop-shadow(0 12px 24px rgba(251,157,156,0.5))", width: 90, height: "auto" }}
+              style={{ filter: "drop-shadow(0 12px 24px rgba(251,157,156,0.5))", width: "clamp(52px,8vw,90px)", height: "auto" }}
             />
           </motion.div>
 
           {/* Yellow coin — bottom left, floats down offset */}
           <motion.div
-            className="absolute bottom-8 left-8 z-10"
+            className="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-10"
             animate={{ y: [0, 14, 0] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
             style={{ translateZ: 40 }}
@@ -214,7 +226,7 @@ export default function Hero3D() {
               alt=""
               width={72}
               height={72}
-              style={{ filter: "drop-shadow(0 10px 20px rgba(252,239,182,0.6))", width: 72, height: "auto" }}
+              style={{ filter: "drop-shadow(0 10px 20px rgba(252,239,182,0.6))", width: "clamp(42px,6vw,72px)", height: "auto" }}
             />
           </motion.div>
 
@@ -223,7 +235,7 @@ export default function Hero3D() {
             alt="bloomé app preview"
             width={900}
             height={900}
-            className="w-full max-w-3xl h-auto"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-3xl h-auto"
             style={{ filter: "drop-shadow(0 60px 100px rgba(251,157,156,0.5))" }}
             priority
           />
