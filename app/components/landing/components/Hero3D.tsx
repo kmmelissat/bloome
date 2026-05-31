@@ -50,8 +50,9 @@ export default function Hero3D() {
 
   // Scroll fade-out for hero
   const { scrollY } = useScroll();
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const heroY       = useTransform(scrollY, [0, 400], [0, -60]);
+  const scrollEnd = typeof window !== "undefined" ? window.innerHeight * 0.75 : 600;
+  const heroOpacity = useTransform(scrollY, [0, scrollEnd], [1, 0]);
+  const heroY       = useTransform(scrollY, [0, scrollEnd], [0, -60]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
