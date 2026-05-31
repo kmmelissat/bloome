@@ -143,7 +143,7 @@ export default function Hero3D() {
             variants={fadeUp}
             className="text-text-muted text-[15px] md:text-[17px] max-w-sm leading-relaxed mb-6 md:mb-10"
           >
-            Track expenses, manage cards, and get AI-powered insights — all in one elegant app.
+            Track expenses, manage cards, and get AI-powered insights. All in one elegant app.
           </motion.p>
 
           {/* CTA — only "Get started" on mobile, Log in is in the nav */}
@@ -152,7 +152,7 @@ export default function Hero3D() {
               href="/signup"
               className="px-8 py-3.5 md:py-4 rounded-full bg-linear-to-r from-primary to-warm font-semibold text-[15px] md:text-[16px] text-center text-text transition-opacity hover:opacity-85 active:opacity-70"
             >
-              Get started — it&apos;s free
+              Get started, it&apos;s free
             </Link>
             <Link
               href="/login"

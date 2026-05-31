@@ -227,7 +227,7 @@ function BudgetMockup() {
                   transition={{ duration: 0.4, delay: 0.7, ease }}
                 >
                   <IconAlertTriangle size={10} stroke={2} className="text-primary" />
-                  <p className="text-[8px] text-primary font-semibold">95% used — almost there</p>
+                  <p className="text-[8px] text-primary font-semibold">95% used. Almost there.</p>
                 </motion.div>
               )}
             </motion.div>
@@ -552,7 +552,7 @@ const features: Feature[] = [
   {
     badge: "Know before you blow it",
     title: "Budgets that stick.",
-    description: "Set monthly limits by category. A live progress bar shows exactly where you stand — and bloomé warns you before you overspend.",
+    description: "Set monthly limits by category. A live progress bar shows exactly where you stand, and bloomé warns you before you overspend.",
     mockup: <BudgetMockup />,
     flip: true,
     floatDelay: 0.6,
@@ -560,7 +560,7 @@ const features: Feature[] = [
   {
     badge: "Zero effort logging",
     title: "Auto-import from your bank.",
-    description: "Forward your bank's notification emails to bloomé. We read them and log the transaction instantly — no manual entry needed.",
+    description: "Forward your bank's notification emails to bloomé. We read them and log the transaction instantly. No manual entry needed.",
     mockup: <AutoImportMockup />,
     flip: false,
     floatDelay: 1.2,

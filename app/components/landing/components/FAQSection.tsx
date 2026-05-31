@@ -7,23 +7,23 @@ import { IconPlus } from "@tabler/icons-react";
 const faqs = [
   {
     q: "Is bloomé really free?",
-    a: "Yes — bloomé is completely free to use. No credit card required, no hidden fees. We may introduce optional premium features in the future, but the core experience will always be free.",
+    a: "Yes. bloomé is completely free to use. No credit card required, no hidden fees. We may introduce optional premium features in the future, but the core experience will always be free.",
   },
   {
     q: "How does the email auto-import work?",
-    a: "You connect your email account directly from the app — no forwarding needed. bloomé automatically reads your bank's transaction notification emails, extracts the merchant, amount, date, and card, and logs each one as a transaction instantly. Your emails are never stored beyond what's needed to create the transaction.",
+    a: "You connect your email account directly from the app (no forwarding needed). bloomé automatically reads your bank's transaction notification emails, extracts the merchant, amount, date, and card, and logs each one as a transaction instantly. Your emails are never stored beyond what's needed to create the transaction.",
   },
   {
     q: "Is my financial data safe?",
-    a: "Absolutely. bloomé never stores full card numbers — only the last 4 digits. All data is encrypted at rest and in transit. We don't sell your data, ever. You can export or delete everything from Settings at any time.",
+    a: "Absolutely. bloomé never stores full card numbers, only the last 4 digits. All data is encrypted at rest and in transit. We don't sell your data, ever. You can export or delete everything from Settings at any time.",
   },
   {
     q: "Do I need to download an app?",
-    a: "No. bloomé is a Progressive Web App (PWA). Open it in your browser, tap 'Add to Home Screen', and it installs like a native app — with offline support, fast load times, and no App Store involved.",
+    a: "No. bloomé is a Progressive Web App (PWA). Open it in your browser, tap 'Add to Home Screen', and it installs like a native app: offline support, fast load times, no App Store involved.",
   },
   {
     q: "Which banks are supported for auto-import?",
-    a: "Any bank that sends email notifications for transactions. Since we read the email text with AI, it works with most major banks worldwide — HSBC, Banamex, BBVA, Chase, and more — without needing official integrations.",
+    a: "Any bank that sends email notifications for transactions. Since we read the email text with AI, it works with most major banks worldwide (HSBC, Banamex, BBVA, Chase, and more) without needing official integrations.",
   },
   {
     q: "Can I use bloomé for multiple cards and currencies?",
@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "What AI model powers the Insights feature?",
-    a: "bloomé uses Claude by Anthropic — one of the most capable and privacy-focused AI models available. Your financial context is sent securely to generate insights and is never used to train AI models.",
+    a: "bloomé uses Claude by Anthropic, one of the most capable and privacy-focused AI models available. Your financial context is sent securely to generate insights and is never used to train AI models.",
   },
 ];
 
