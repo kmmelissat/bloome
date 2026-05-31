@@ -47,8 +47,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${cormorant.variable} h-full`}>
-      <body className="h-full antialiased">{children}</body>
+    <html lang="en" className={`${dmSans.variable} ${cormorant.variable}`}>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

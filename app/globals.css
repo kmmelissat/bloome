@@ -42,10 +42,10 @@
 }
 
 html {
-  height: 100dvh;
   font-family: var(--font-sans);
   -webkit-text-size-adjust: 100%;
   color-scheme: light;
+  scroll-behavior: smooth;
 }
 
 body {

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { IconPlus } from "@tabler/icons-react";
 
 const faqs = [
@@ -83,17 +83,8 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 }
 
 export default function FAQSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [40, 0, 0, -40]);
-
   return (
-    <motion.section
-      ref={ref}
-      style={{ opacity, y }}
-      className="w-full max-w-3xl mx-auto px-8 pb-32"
-    >
+    <section className="w-full max-w-3xl mx-auto px-8 pb-32">
       {/* Header */}
       <div className="text-center mb-12">
         <span className="text-[12px] font-bold tracking-[0.15em] uppercase text-primary mb-3 block">
@@ -113,6 +104,6 @@ export default function FAQSection() {
           <FAQItem key={faq.q} {...faq} index={i} />
         ))}
       </div>
-    </motion.section>
+    </section>
   );
 }

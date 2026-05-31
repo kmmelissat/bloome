@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { IconStar, IconQuote } from "@tabler/icons-react";
 
 const testimonials = [
@@ -105,16 +104,11 @@ function ScrollingRow({ items, reverse = false }: { items: typeof testimonials; 
 }
 
 export default function TestimonialsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [40, 0, 0, -40]);
-
   const row1 = testimonials.slice(0, 3);
   const row2 = testimonials.slice(3, 6);
 
   return (
-    <motion.section ref={ref} style={{ opacity, y }} className="w-full pb-32 overflow-hidden">
+    <section className="w-full pb-32 overflow-hidden">
       {/* Header */}
       <div className="text-center mb-14 px-8">
         <span className="text-[12px] font-bold tracking-[0.15em] uppercase text-primary mb-3 block">
@@ -136,6 +130,6 @@ export default function TestimonialsSection() {
         <ScrollingRow items={row1} />
         <ScrollingRow items={row2} reverse />
       </div>
-    </motion.section>
+    </section>
   );
 }
