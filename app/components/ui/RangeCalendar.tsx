@@ -89,7 +89,7 @@ export default function RangeCalendar({ rangeStart, rangeEnd, onSelect, compact 
       </div>
 
       {/* Month nav */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between px-3 py-2">
         <button
           onClick={prevMonth}
           className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-black/5 active:opacity-60"
@@ -116,8 +116,8 @@ export default function RangeCalendar({ rangeStart, rangeEnd, onSelect, compact 
         ))}
       </div>
 
-      {/* Day grid */}
-      <div className="grid grid-cols-7">
+      {/* Day grid — fixed height = 6 rows max */}
+      <div className="grid grid-cols-7" style={{ height: compact ? 192 : 240 }}>
         {cells.map((day, i) => {
           if (!day) return <div key={`e-${i}`} />;
 
