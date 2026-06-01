@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Drawer } from "vaul";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 export type FilterResult = {
@@ -55,16 +56,14 @@ function getPresetRange(id: string): { start: Date; end: Date } {
   }
 }
 
-const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+const WEEK_DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
 function sameDay(a: Date, b: Date) {
-  return a.getFullYear() === b.getFullYear() &&
+  return (
+    a.getFullYear() === b.getFullYear() &&
     a.getMonth() === b.getMonth() &&
-    a.getDate() === b.getDate();
-}
-
-function isBetween(d: Date, s: Date, e: Date) {
-  return d > s && d < e;
+    a.getDate() === b.getDate()
+  );
 }
 
 function startOfDay(d: Date) {
@@ -93,51 +92,51 @@ function Calendar({
   const [viewMonth, setViewMonth] = useState(new Date().getMonth());
 
   const today = startOfDay(new Date());
-  const firstDayOfMonth = new Date(viewYear, viewMonth, 1);
+  const firstDay = new Date(viewYear, viewMonth, 1);
   const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-  const startOffset = firstDayOfMonth.getDay();
+  const startOffset = firstDay.getDay();
 
   const cells: (number | null)[] = [
     ...Array(startOffset).fill(null),
     ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
   ];
 
-  const monthLabel = firstDayOfMonth.toLocaleDateString("en-US", {
+  const monthLabel = firstDay.toLocaleDateString("en-US", {
     month: "long",
     year: "numeric",
   });
 
   function prevMonth() {
-    if (viewMonth === 0) { setViewMonth(11); setViewYear(y => y - 1); }
-    else setViewMonth(m => m - 1);
+    if (viewMonth === 0) { setViewMonth(11); setViewYear((y) => y - 1); }
+    else setViewMonth((m) => m - 1);
   }
   function nextMonth() {
-    if (viewMonth === 11) { setViewMonth(0); setViewYear(y => y + 1); }
-    else setViewMonth(m => m + 1);
+    if (viewMonth === 11) { setViewMonth(0); setViewYear((y) => y + 1); }
+    else setViewMonth((m) => m + 1);
   }
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2">
       {/* Month nav */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-1">
         <button
           onClick={prevMonth}
-          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 active:opacity-60 transition-opacity"
+          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 active:opacity-60"
         >
           <IconChevronLeft size={18} stroke={2} className="text-text-muted" />
         </button>
         <span className="text-[14px] font-semibold text-text">{monthLabel}</span>
         <button
           onClick={nextMonth}
-          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 active:opacity-60 transition-opacity"
+          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 active:opacity-60"
         >
           <IconChevronRight size={18} stroke={2} className="text-text-muted" />
         </button>
       </div>
 
-      {/* Day labels */}
+      {/* Day-of-week labels */}
       <div className="grid grid-cols-7">
-        {DAYS.map((d) => (
+        {WEEK_DAYS.map((d) => (
           <div key={d} className="text-[11px] font-semibold text-text-muted text-center py-1">
             {d}
           </div>
@@ -152,10 +151,10 @@ function Calendar({
           const date = startOfDay(new Date(viewYear, viewMonth, day));
           const isStart = rangeStart ? sameDay(date, rangeStart) : false;
           const isEnd = rangeEnd ? sameDay(date, rangeEnd) : false;
-          const isEndOrStart = isStart || isEnd;
           const inRange =
-            rangeStart && rangeEnd ? isBetween(date, rangeStart, rangeEnd) : false;
+            rangeStart && rangeEnd ? date > rangeStart && date < rangeEnd : false;
           const isToday = sameDay(date, today);
+          const isEndOrStart = isStart || isEnd;
 
           const colInRow = i % 7;
           const isFirstCol = colInRow === 0;
@@ -174,7 +173,6 @@ function Calendar({
                   }}
                 />
               )}
-
               <button
                 onClick={() => onSelect(date)}
                 className="relative z-10 w-9 h-9 rounded-full flex items-center justify-center text-[14px] font-medium transition-all duration-150 active:scale-90"
@@ -202,7 +200,6 @@ export default function DateFilterSheet({ open, current, onClose, onApply }: Pro
   const [rangeEnd, setRangeEnd] = useState<Date | null>(current.end);
   const [pickingEnd, setPickingEnd] = useState(false);
 
-  // Sync when sheet opens
   useEffect(() => {
     if (open) {
       setSelectedPreset(current.presetId);
@@ -255,90 +252,80 @@ export default function DateFilterSheet({ open, current, onClose, onApply }: Pro
   const canApply = !!rangeStart && (!!rangeEnd || !pickingEnd);
 
   return (
-    <>
-      {/* Backdrop */}
-      <div
-        onClick={onClose}
-        className="fixed inset-0 z-60 transition-opacity duration-300"
-        style={{
-          background: "rgba(0,0,0,0.25)",
-          opacity: open ? 1 : 0,
-          pointerEvents: open ? "auto" : "none",
-        }}
-      />
-
-      {/* Sheet */}
-      <div
-        className="fixed bottom-0 left-0 right-0 z-70 transition-transform duration-350 ease-out"
-        style={{
-          transform: open ? "translateY(0)" : "translateY(110%)",
-          willChange: "transform",
-        }}
-      >
-        <div className="bg-surface rounded-t-[28px] shadow-[0_-4px_40px_rgba(0,0,0,0.12)] pb-[calc(24px+env(safe-area-inset-bottom))]">
-          {/* Handle */}
-          <div className="flex justify-center pt-3 pb-1">
-            <div className="w-9 h-1 rounded-full bg-black/10" />
-          </div>
-
-          <div className="px-5 pt-2 pb-4 flex flex-col gap-5">
-            {/* Title */}
-            <h2 className="text-[17px] font-bold text-text">Select period</h2>
-
-            {/* Presets grid */}
-            <div className="grid grid-cols-3 gap-2">
-              {PRESETS.map((p) => (
-                <button
-                  key={p.id}
-                  onClick={() => handlePreset(p.id)}
-                  className="py-2 px-3 rounded-[14px] text-[13px] font-semibold text-center transition-all duration-200 active:scale-95"
-                  style={
-                    selectedPreset === p.id
-                      ? { background: "#fb9d9c", color: "#fff" }
-                      : { background: "rgba(0,0,0,0.05)", color: "#6e6e73" }
-                  }
-                >
-                  {p.label}
-                </button>
-              ))}
+    <Drawer.Root open={open} onOpenChange={(v) => !v && onClose()}>
+      <Drawer.Portal>
+        <Drawer.Overlay className="fixed inset-0 z-60 bg-black/30" />
+        <Drawer.Content className="fixed bottom-0 left-0 right-0 z-70 outline-none">
+          <div className="bg-surface rounded-t-[28px] shadow-[0_-4px_40px_rgba(0,0,0,0.10)] pb-[calc(24px+env(safe-area-inset-bottom))]">
+            {/* Handle */}
+            <div className="flex justify-center pt-3 pb-2">
+              <div className="w-9 h-1 rounded-full bg-black/10" />
             </div>
 
-            {/* Divider */}
-            <div className="flex items-center gap-3">
-              <div className="flex-1 h-px bg-black/[0.06]" />
-              <span className="text-[12px] text-text-muted font-medium">or pick a range</span>
-              <div className="flex-1 h-px bg-black/[0.06]" />
-            </div>
+            <div className="px-5 pt-1 pb-4 flex flex-col gap-5">
+              <Drawer.Title className="text-[17px] font-bold text-text">
+                Select period
+              </Drawer.Title>
 
-            {/* Range hint */}
-            {pickingEnd && rangeStart && (
-              <div className="text-[12px] text-text-muted text-center -mt-2">
-                From <span className="font-semibold text-primary">{rangeStart.toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span> — tap an end date
+              {/* Presets */}
+              <div className="grid grid-cols-3 gap-2">
+                {PRESETS.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => handlePreset(p.id)}
+                    className="py-2 px-3 rounded-[14px] text-[13px] font-semibold text-center transition-all duration-200 active:scale-95"
+                    style={
+                      selectedPreset === p.id
+                        ? { background: "#fb9d9c", color: "#fff" }
+                        : { background: "rgba(0,0,0,0.05)", color: "#6e6e73" }
+                    }
+                  >
+                    {p.label}
+                  </button>
+                ))}
               </div>
-            )}
 
-            {/* Calendar */}
-            <Calendar
-              rangeStart={rangeStart}
-              rangeEnd={rangeEnd}
-              onSelect={handleDaySelect}
-            />
+              {/* Divider */}
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-px bg-black/6" />
+                <span className="text-[12px] text-text-muted font-medium">or pick a range</span>
+                <div className="flex-1 h-px bg-black/6" />
+              </div>
 
-            {/* Apply */}
-            <button
-              onClick={handleApply}
-              disabled={!canApply}
-              className="w-full py-3.5 rounded-[16px] text-[15px] font-bold transition-all duration-200 active:scale-[0.98]"
-              style={{
-                background: canApply ? "#fb9d9c" : "rgba(0,0,0,0.06)",
-                color: canApply ? "#fff" : "#6e6e73",
-              }}
-            >
-              Apply
-            </button>
+              {/* Range hint */}
+              {pickingEnd && rangeStart && (
+                <p className="text-[12px] text-text-muted text-center -mt-2">
+                  From{" "}
+                  <span className="font-semibold text-primary">
+                    {rangeStart.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                  </span>{" "}
+                  — tap an end date
+                </p>
+              )}
+
+              {/* Calendar */}
+              <Calendar
+                rangeStart={rangeStart}
+                rangeEnd={rangeEnd}
+                onSelect={handleDaySelect}
+              />
+
+              {/* Apply */}
+              <button
+                onClick={handleApply}
+                disabled={!canApply}
+                className="w-full py-3.5 rounded-[16px] text-[15px] font-bold transition-all duration-200 active:scale-[0.98]"
+                style={{
+                  background: canApply ? "#fb9d9c" : "rgba(0,0,0,0.06)",
+                  color: canApply ? "#fff" : "#6e6e73",
+                }}
+              >
+                Apply
+              </button>
+            </div>
           </div>
-        </div>
-      </div>
-    </>
+        </Drawer.Content>
+      </Drawer.Portal>
+    </Drawer.Root>
   );
 }
