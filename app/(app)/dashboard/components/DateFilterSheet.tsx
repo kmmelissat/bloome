@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { Drawer } from "vaul";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import RangeCalendar from "@/app/components/ui/RangeCalendar";
+import Modal from "@/app/components/ui/Modal";
 
 export type FilterResult = {
   label: string;
@@ -56,8 +57,6 @@ function getPresetRange(id: string): { start: Date; end: Date } {
   }
 }
 
-const WEEK_DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-
 function sameDay(a: Date, b: Date) {
   return (
     a.getFullYear() === b.getFullYear() &&
@@ -79,122 +78,99 @@ function formatLabel(start: Date, end: Date): string {
   return `${fmt(start)} – ${fmt(end)}`;
 }
 
-function Calendar({
-  rangeStart,
-  rangeEnd,
-  onSelect,
-}: {
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isDesktop;
+}
+
+// ─── Shared inner content ────────────────────────────────────────────────────
+
+type ContentProps = {
+  selectedPreset: string | undefined;
   rangeStart: Date | null;
   rangeEnd: Date | null;
-  onSelect: (d: Date) => void;
-}) {
-  const [viewYear, setViewYear] = useState(new Date().getFullYear());
-  const [viewMonth, setViewMonth] = useState(new Date().getMonth());
+  canApply: boolean;
+  compact?: boolean;
+  onPreset: (id: string) => void;
+  onDaySelect: (d: Date) => void;
+  onApply: () => void;
+};
 
-  const today = startOfDay(new Date());
-  const firstDay = new Date(viewYear, viewMonth, 1);
-  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-  const startOffset = firstDay.getDay();
-
-  const cells: (number | null)[] = [
-    ...Array(startOffset).fill(null),
-    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
-  ];
-
-  const monthLabel = firstDay.toLocaleDateString("en-US", {
-    month: "long",
-    year: "numeric",
-  });
-
-  function prevMonth() {
-    if (viewMonth === 0) { setViewMonth(11); setViewYear((y) => y - 1); }
-    else setViewMonth((m) => m - 1);
-  }
-  function nextMonth() {
-    if (viewMonth === 11) { setViewMonth(0); setViewYear((y) => y + 1); }
-    else setViewMonth((m) => m + 1);
-  }
-
+function FilterContent({
+  selectedPreset,
+  rangeStart,
+  rangeEnd,
+  canApply,
+  compact = false,
+  onPreset,
+  onDaySelect,
+  onApply,
+}: ContentProps) {
   return (
-    <div className="flex flex-col gap-2">
-      {/* Month nav */}
-      <div className="flex items-center justify-between mb-1">
-        <button
-          onClick={prevMonth}
-          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 active:opacity-60"
-        >
-          <IconChevronLeft size={18} stroke={2} className="text-text-muted" />
-        </button>
-        <span className="text-[14px] font-semibold text-text">{monthLabel}</span>
-        <button
-          onClick={nextMonth}
-          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 active:opacity-60"
-        >
-          <IconChevronRight size={18} stroke={2} className="text-text-muted" />
-        </button>
+    <div className={`flex flex-col ${compact ? "gap-3" : "gap-5"}`}>
+      {/* Calendar */}
+      <RangeCalendar
+        rangeStart={rangeStart}
+        rangeEnd={rangeEnd}
+        onSelect={onDaySelect}
+        compact={compact}
+      />
+
+      {/* Divider */}
+      <div className="flex items-center gap-3">
+        <div className="flex-1 h-px bg-black/6" />
+        <span className={`${compact ? "text-[11px]" : "text-[12px]"} text-text-muted font-medium`}>or quick select</span>
+        <div className="flex-1 h-px bg-black/6" />
       </div>
 
-      {/* Day-of-week labels */}
-      <div className="grid grid-cols-7">
-        {WEEK_DAYS.map((d) => (
-          <div key={d} className="text-[11px] font-semibold text-text-muted text-center py-1">
-            {d}
-          </div>
+      {/* Presets */}
+      <div className="grid grid-cols-3 gap-2">
+        {PRESETS.map((p) => (
+          <button
+            key={p.id}
+            onClick={() => onPreset(p.id)}
+            className={`${compact ? "py-1.5 text-[12px]" : "py-2 text-[13px]"} px-3 font-semibold text-center transition-all duration-200 active:scale-95`}
+            style={{
+              borderRadius: 12,
+              ...(selectedPreset === p.id
+                ? { background: "#fb9d9c", color: "#fff" }
+                : { background: "rgba(0,0,0,0.05)", color: "#6e6e73" }),
+            }}
+          >
+            {p.label}
+          </button>
         ))}
       </div>
 
-      {/* Day grid */}
-      <div className="grid grid-cols-7">
-        {cells.map((day, i) => {
-          if (!day) return <div key={`e-${i}`} />;
-
-          const date = startOfDay(new Date(viewYear, viewMonth, day));
-          const isStart = rangeStart ? sameDay(date, rangeStart) : false;
-          const isEnd = rangeEnd ? sameDay(date, rangeEnd) : false;
-          const inRange =
-            rangeStart && rangeEnd ? date > rangeStart && date < rangeEnd : false;
-          const isToday = sameDay(date, today);
-          const isEndOrStart = isStart || isEnd;
-
-          const colInRow = i % 7;
-          const isFirstCol = colInRow === 0;
-          const isLastCol = colInRow === 6;
-
-          return (
-            <div key={day} className="relative flex items-center justify-center h-10">
-              {/* Range band */}
-              {(inRange || isStart || isEnd) && rangeStart && rangeEnd && (
-                <div
-                  className="absolute inset-y-1"
-                  style={{
-                    background: "rgba(251,157,156,0.15)",
-                    left: isStart || isFirstCol ? "50%" : 0,
-                    right: isEnd || isLastCol ? "50%" : 0,
-                  }}
-                />
-              )}
-              <button
-                onClick={() => onSelect(date)}
-                className="relative z-10 w-9 h-9 rounded-full flex items-center justify-center text-[14px] font-medium transition-all duration-150 active:scale-90"
-                style={
-                  isEndOrStart
-                    ? { background: "#fb9d9c", color: "#fff", fontWeight: 700 }
-                    : isToday
-                    ? { color: "#fb9d9c", fontWeight: 700 }
-                    : { color: "#1c1c1e" }
-                }
-              >
-                {day}
-              </button>
-            </div>
-          );
-        })}
-      </div>
+      {/* Apply */}
+      <button
+        onClick={onApply}
+        disabled={!canApply}
+        className={`w-full ${compact ? "py-2.5 text-[13px]" : "py-3.5 text-[15px]"} font-bold transition-all duration-200 active:scale-[0.98]`}
+        style={{
+          borderRadius: 14,
+          background: canApply ? "#fb9d9c" : "rgba(0,0,0,0.06)",
+          color: canApply ? "#fff" : "#6e6e73",
+        }}
+      >
+        Apply
+      </button>
     </div>
   );
 }
 
+// ─── Main component ──────────────────────────────────────────────────────────
+
 export default function DateFilterSheet({ open, current, onClose, onApply }: Props) {
+  const isDesktop = useIsDesktop();
+
   const [selectedPreset, setSelectedPreset] = useState<string | undefined>(current.presetId);
   const [rangeStart, setRangeStart] = useState<Date | null>(current.start);
   const [rangeEnd, setRangeEnd] = useState<Date | null>(current.end);
@@ -251,77 +227,41 @@ export default function DateFilterSheet({ open, current, onClose, onApply }: Pro
 
   const canApply = !!rangeStart && (!!rangeEnd || !pickingEnd);
 
+  const contentProps: ContentProps = {
+    selectedPreset,
+    rangeStart,
+    rangeEnd,
+    canApply,
+    compact: isDesktop,
+    onPreset: handlePreset,
+    onDaySelect: handleDaySelect,
+    onApply: handleApply,
+  };
+
+  // ── Desktop modal ──────────────────────────────────────────────────────────
+  if (isDesktop) {
+    return (
+      <Modal open={open} onClose={onClose} title="Select period">
+        <FilterContent {...contentProps} />
+      </Modal>
+    );
+  }
+
+  // ── Mobile drawer ──────────────────────────────────────────────────────────
   return (
     <Drawer.Root open={open} onOpenChange={(v) => !v && onClose()}>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 z-60 bg-black/30" />
         <Drawer.Content className="fixed bottom-0 left-0 right-0 z-70 outline-none">
           <div className="bg-surface rounded-t-[28px] shadow-[0_-4px_40px_rgba(0,0,0,0.10)] pb-[calc(24px+env(safe-area-inset-bottom))]">
-            {/* Handle */}
             <div className="flex justify-center pt-3 pb-2">
               <div className="w-9 h-1 rounded-full bg-black/10" />
             </div>
-
             <div className="px-5 pt-1 pb-4 flex flex-col gap-5">
               <Drawer.Title className="text-[17px] font-bold text-text">
                 Select period
               </Drawer.Title>
-
-              {/* Presets */}
-              <div className="grid grid-cols-3 gap-2">
-                {PRESETS.map((p) => (
-                  <button
-                    key={p.id}
-                    onClick={() => handlePreset(p.id)}
-                    className="py-2 px-3 rounded-[14px] text-[13px] font-semibold text-center transition-all duration-200 active:scale-95"
-                    style={
-                      selectedPreset === p.id
-                        ? { background: "#fb9d9c", color: "#fff" }
-                        : { background: "rgba(0,0,0,0.05)", color: "#6e6e73" }
-                    }
-                  >
-                    {p.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Divider */}
-              <div className="flex items-center gap-3">
-                <div className="flex-1 h-px bg-black/6" />
-                <span className="text-[12px] text-text-muted font-medium">or pick a range</span>
-                <div className="flex-1 h-px bg-black/6" />
-              </div>
-
-              {/* Range hint */}
-              {pickingEnd && rangeStart && (
-                <p className="text-[12px] text-text-muted text-center -mt-2">
-                  From{" "}
-                  <span className="font-semibold text-primary">
-                    {rangeStart.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                  </span>{" "}
-                  — tap an end date
-                </p>
-              )}
-
-              {/* Calendar */}
-              <Calendar
-                rangeStart={rangeStart}
-                rangeEnd={rangeEnd}
-                onSelect={handleDaySelect}
-              />
-
-              {/* Apply */}
-              <button
-                onClick={handleApply}
-                disabled={!canApply}
-                className="w-full py-3.5 rounded-[16px] text-[15px] font-bold transition-all duration-200 active:scale-[0.98]"
-                style={{
-                  background: canApply ? "#fb9d9c" : "rgba(0,0,0,0.06)",
-                  color: canApply ? "#fff" : "#6e6e73",
-                }}
-              >
-                Apply
-              </button>
+              <FilterContent {...contentProps} />
             </div>
           </div>
         </Drawer.Content>
