@@ -23,7 +23,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-30 pt-[env(safe-area-inset-top)]">
-      {/* Mobile: usuario izquierda, iso centro, notificaciones derecha */}
+      {/* Mobile: user left, iso center, notifications right */}
       <div className="flex items-center md:hidden py-3">
         <div className="flex-1">
           <IconButton><IconUserCircle size={30} /></IconButton>
@@ -34,7 +34,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Desktop: título a la izquierda, iconos a la derecha */}
+      {/* Desktop: title left, icons right */}
       <div className="hidden md:flex items-center justify-between py-5">
         <h1 className="text-[22px] font-bold text-text tracking-[-0.3px]">{title}</h1>
         <div className="flex items-center gap-1">
