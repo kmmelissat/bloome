@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { IconTrendingUp, IconTrendingDown, IconChevronDown } from "@tabler/icons-react";
-import DateFilterModal, { type FilterResult } from "./DateFilterSheet";
+import DateFilterSheet, { type FilterResult } from "./DateFilterSheet";
 
 type View = "spent" | "income" | "net";
 
@@ -132,7 +132,7 @@ export default function FinanceSummaryCard() {
         </div>
       </div>
 
-      <DateFilterModal
+      <DateFilterSheet
         open={sheetOpen}
         current={filter}
         onClose={() => setSheetOpen(false)}
