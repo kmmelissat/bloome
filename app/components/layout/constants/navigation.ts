@@ -5,7 +5,6 @@ import {
   IconChartPie,
   IconSparkles,
   IconChartBar,
-  IconSettings,
 } from "@tabler/icons-react";
 import type { TablerIcon } from "@tabler/icons-react";
 
@@ -24,8 +23,8 @@ export const NAV_TABS: NavTab[] = [
 ];
 
 export const BOTTOM_TABS: NavTab[] = [
-  { href: "/dashboard", label: "Inicio", Icon: IconHome },
+  { href: "/dashboard", label: "Home", Icon: IconHome },
   { href: "/transactions", label: "Stats", Icon: IconChartBar },
   { href: "/budgets", label: "Budget", Icon: IconChartPie },
-  { href: "/settings", label: "Settings", Icon: IconSettings },
+  { href: "/cards", label: "Cards", Icon: IconCreditCard },
 ];
