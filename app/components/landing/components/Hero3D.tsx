@@ -150,7 +150,7 @@ export default function Hero3D() {
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 mb-6 md:mb-12 w-full sm:w-auto">
             <Link
               href="/signup"
-              className="px-8 py-3.5 md:py-4 rounded-full bg-linear-to-r from-primary to-warm font-semibold text-[15px] md:text-[16px] text-center text-text transition-opacity hover:opacity-85 active:opacity-70"
+              className="px-8 py-3.5 md:py-4 rounded-full bg-linear-to-r from-primary to-warm font-semibold text-[15px] md:text-[16px] text-center text-white transition-opacity hover:opacity-85 active:opacity-70"
             >
               Get started, it&apos;s free
             </Link>

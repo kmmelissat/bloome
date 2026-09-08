@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌸 bloomé
 
-## Getting Started
+Progressive Web App de finanzas personales con look de app iOS nativa — minimalista y elegante. Controla gastos, ingresos, tarjetas, presupuestos e insights con IA, todo desde el navegador.
 
-First, run the development server:
+## ✨ Features
+
+- **Dashboard** — resumen mensual (ingresos vs. gastos), balance, gráfica de gastos por categoría y últimas transacciones
+- **Transacciones** — CRUD completo con filtros por fecha, categoría, tarjeta y tipo
+- **Tarjetas** — gestión de tarjetas de crédito/débito, saldo usado vs. límite, recordatorios de pago
+- **Presupuestos** — por categoría y período, con alertas al 80% y 100%
+- **Ingresos** — registro y historial mensual por fuente
+- **Insights IA** — análisis de gastos en lenguaje natural, detección de anomalías y sugerencias de ahorro (Anthropic Claude)
+
+Ver [`CLAUDE.md`](./CLAUDE.md) para el detalle completo de producto, schema de base de datos y roadmap.
+
+## 🛠️ Stack
+
+- [Next.js 16](https://nextjs.org) (App Router)
+- [React 19](https://react.dev)
+- [Tailwind CSS 4](https://tailwindcss.com)
+- [shadcn/ui](https://ui.shadcn.com) + [Base UI](https://base-ui.com)
+- [Framer Motion](https://www.framer.com/motion/) para animaciones
+- [Tabler Icons](https://tabler.io/icons) / [Lucide](https://lucide.dev)
+- TypeScript
+
+> ⚠️ Este proyecto usa una versión de Next.js con cambios de API respecto a lo habitual. Antes de escribir código, revisa `node_modules/next/dist/docs/` (ver [`AGENTS.md`](./AGENTS.md)).
+
+## 🚀 Getting Started
+
+Instala dependencias y levanta el servidor de desarrollo:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts disponibles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando         | Descripción                          |
+| --------------- | ------------------------------------- |
+| `npm run dev`   | Levanta el servidor de desarrollo     |
+| `npm run build` | Compila la app para producción        |
+| `npm run start` | Sirve el build de producción          |
 
-## Learn More
+## 📂 Estructura del proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+  (auth)/          # Login, signup — layout sin nav
+  (app)/           # Dashboard, transactions, cards, budgets, income, insights
+  components/
+    landing/       # Landing page pública
+    layout/        # Shell, sidebar, tabbar, header
+    ui/            # Primitivos (Button, Modal, Drawer, etc.)
+  globals.css      # Design tokens (colores, radios, sombras)
+lib/
+  utils.ts
+public/
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Design System
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Estética iOS nativa minimalista — ver tokens completos en [`app/globals.css`](./app/globals.css).
 
-## Deploy on Vercel
+| Token                  | Valor      | Uso                          |
+| ----------------------- | ---------- | ----------------------------- |
+| `--color-primary`       | `#fb9d9c`  | Coral/salmon — acción principal |
+| `--color-accent`        | `#fcefb6`  | Amarillo pastel — highlights   |
+| `--color-warm`          | `#ffe2cf`  | Durazno — cards secundarias    |
+| `--color-bg`            | `#fffaf9`  | Fondo base                     |
+| `--color-text`          | `#1c1c1e`  | Texto principal                |
+| `--color-text-muted`    | `#6e6e73`  | Texto secundario               |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Lineamientos: border radius 16–24px en cards, sombras suaves tipo iOS, transiciones 250–350ms, mobile-first desde 375px, tap targets mínimo 44px.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📚 Más información
+
+- [`CLAUDE.md`](./CLAUDE.md) — visión de producto, schema de Supabase, roadmap y prompts de IA
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)

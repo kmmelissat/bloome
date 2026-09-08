@@ -38,7 +38,7 @@ export default function FloatingNav() {
               </Link>
               <Link
                 href="/signup"
-                className="text-[13px] font-semibold text-text px-4 py-2 rounded-full bg-linear-to-r from-primary to-warm transition-opacity hover:opacity-85 active:opacity-70"
+                className="text-[13px] font-semibold text-white px-4 py-2 rounded-full bg-linear-to-r from-primary to-warm transition-opacity hover:opacity-85 active:opacity-70"
               >
                 Get started
               </Link>

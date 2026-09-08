@@ -68,13 +68,13 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row gap-3 shrink-0">
               <Link
                 href="/signup"
-                className="px-7 py-3.5 rounded-full bg-text text-white font-semibold text-[15px] text-center transition-opacity hover:opacity-80 active:opacity-70 whitespace-nowrap"
+                className="px-7 py-3.5 rounded-full bg-white text-primary font-semibold text-[15px] text-center shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-opacity hover:opacity-85 active:opacity-70 whitespace-nowrap"
               >
                 Get started free
               </Link>
               <Link
                 href="/login"
-                className="px-7 py-3.5 rounded-full bg-black/10 text-text font-medium text-[15px] text-center transition-opacity hover:bg-black/15 active:opacity-70 whitespace-nowrap"
+                className="px-7 py-3.5 rounded-full bg-white/40 text-text font-medium text-[15px] text-center transition-opacity hover:bg-white/55 active:opacity-70 whitespace-nowrap"
               >
                 Log in
               </Link>
